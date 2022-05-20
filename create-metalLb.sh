@@ -4,6 +4,15 @@ if kubectl -n kube-system describe cm kube-proxy | grep -q 'mode: "ipvs"';
 then
         echo "Cannot install metalLB when kube proxy mode is IPVS"; exit 0;
 fi
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
 
-kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.12.1/manifests/namespace.yaml
-kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.12.1/manifests/metallb.yaml
+cat <<EOF >values.yaml
+configInline:
+  address-pools:
+   - name: default
+     protocol: layer2
+     addresses:
+     - $1
+EOF
