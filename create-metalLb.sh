@@ -16,3 +16,8 @@ configInline:
      addresses:
      - $1
 EOF
+
+
+helm install metallb metallb/metallb -f values.yaml
+
+rm values.yaml
