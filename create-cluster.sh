@@ -19,7 +19,7 @@ sudo systemctl restart docker
 # Install cri-dockerd
 VER=$(curl -s https://api.github.com/repos/Mirantis/cri-dockerd/releases/latest|grep tag_name | cut -d '"' -f 4)
 wget https://github.com/Mirantis/cri-dockerd/releases/download/${VER}/cri-dockerd-${VER}.amd64.tgz
-tar xvf cri-dockerd-${VER}-linux-amd64.tar.gz
+tar xvf cri-dockerd-${VER}.amd64.tgz
 sudo mv cri-dockerd /usr/local/bin/
 sudo wget https://raw.githubusercontent.com/Mirantis/cri-dockerd/50c048cb54e52cd9058f044671e309e9fbda82e4/packaging/systemd/cri-docker.service
 sudo wget https://raw.githubusercontent.com/Mirantis/cri-dockerd/50c048cb54e52cd9058f044671e309e9fbda82e4/packaging/systemd/cri-docker.socket
